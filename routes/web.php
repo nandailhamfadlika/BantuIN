@@ -34,8 +34,8 @@ Route::middleware(['auth.admin'])->prefix('admin')->name('admin.')->group(functi
 
     Route::get('/helpers', [AdminController::class, 'manageHelpers'])->name('manage-helpers');
 
-    Route::get('/helpers/edit/{id}', [HelperController::class, 'editHelper'])->name('edit-helper');
-    Route::post('/helpers/edit/{id}', [HelperController::class, 'updateHelper'])->name('update-helper');
+    Route::get('/helpers/edit/{id}', [AdminController::class, 'editHelper'])->name('edit-helper');
+    Route::post('/helpers/edit/{id}', [AdminController::class, 'updateHelper'])->name('update-helper');
 
     Route::delete('/helpers/{id}', [AdminController::class, 'deleteHelper'])->name('delete-helper');
 

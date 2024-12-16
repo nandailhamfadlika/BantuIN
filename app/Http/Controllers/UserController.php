@@ -15,7 +15,7 @@ class UserController extends Controller
     }
 
     public function listTasks() {
-        $tasks = DB::table('tasks')->join('helpers', 'tasks.helper_id', '=', 'helpers.id')->select('tasks.*', 'helpers.name as helper_nzame', 'helpers.phone as helper_phone')->orderBy('created_at', 'desc')->get();
+        $tasks = DB::table('tasks')->leftJoin('helpers', 'tasks.helper_id', '=', 'helpers.id')->leftJoin('reviews', 'tasks.id', '=', 'reviews.task_id')->select('tasks.*', 'helpers.name as helper_name', 'helpers.phone as helper_phone', 'reviews.id as review_id')->where('tasks.user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('user.list-task', ['tasks' => $tasks]);
     }

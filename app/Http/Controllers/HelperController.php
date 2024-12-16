@@ -60,13 +60,13 @@ class HelperController extends Controller
 
     public function completeTask(Request $request, $id) {
         try {
-            DB::table('tasks')->where('helper_id', $id)->update([
+            DB::table('tasks')->where('id', $id)->update([
                 'status' => 'completed'
             ]);
 
-            return back()->with('success', 'Berhasil mengambil request');
+            return back()->with('success', 'Berhasil menyelesaikan request');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
     }
-}
+}   

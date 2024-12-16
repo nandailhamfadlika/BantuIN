@@ -60,7 +60,7 @@
                                         Tandai Selesai
                                     </button>
                                 </form>
-                            @elseif ($task->status == 'completed')
+                            @elseif ($task->status == 'completed' && !$task->review_id)
                                 <a href="{{route('user.review.create', $task->id)}}" class="btn btn-primary btn-sm">Berikan Review</a>
                             @else
                                 <span class="text-muted">Tidak ada aksi tersedia</span>
