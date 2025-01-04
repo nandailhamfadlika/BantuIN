@@ -29,7 +29,7 @@
                         <td>
                             @if ($task->status == 'pending')
                                 <span class="badge bg-warning">Pending</span>
-                            @elseif ($task->status == 'in_progress')
+                            @elseif ($task->status == 'ongoing')
                                 <span class="badge bg-info">In Progress</span>
                             @else
                                 <span class="badge bg-success">Completed</span>
