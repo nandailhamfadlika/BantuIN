@@ -121,7 +121,7 @@ class AdminController extends Controller
     // Menghapus helper
     public function deleteHelper($id)
     {
-        $helper = User::findOrFail($id);
+        $helper = Helper::findOrFail($id);
         $helper->delete();
 
         return redirect()->route('admin.manage-helpers')->with('success', 'Helper berhasil dihapus!');

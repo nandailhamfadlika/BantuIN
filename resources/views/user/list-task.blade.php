@@ -8,6 +8,7 @@
         <p class="text-muted">Belum ada tugas yang Anda buat.</p>
         <a href="{{ route('user.create-task') }}" class="btn btn-primary">Buat Tugas Baru</a>
     @else
+    <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -29,7 +30,7 @@
                         <td>
                             @if ($task->status == 'pending')
                                 <span class="badge bg-warning">Pending</span>
-                            @elseif ($task->status == 'in_progress')
+                            @elseif ($task->status == 'ongoing')
                                 <span class="badge bg-info">In Progress</span>
                             @else
                                 <span class="badge bg-success">Completed</span>
@@ -70,5 +71,29 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     @endif
+    <nav class="navbar navbar-light bg-white border-top fixed-bottom">
+        <div class="container-fluid d-flex justify-content-around">
+            <a href="{{ route('user.index') }}" class="nav-link">
+                <div class="nav-item">
+                    <span>🏠</span>
+                    <p>Beranda</p>
+                </div>
+            </a>
+            <a href="{{ route('user.list-task') }}" class="nav-link">
+                <div class="nav-item">
+                    <span>📜</span>
+                    <p>Riwayat</p>
+                </div>
+            </a>
+            <form action="{{route('user.logout')}}" method="post">
+                @csrf
+                <div class="nav-item">
+
+                    <button class="nav-link" href="{{ route('user.logout') }}">👤<br>Logout</button>
+                </div>
+            </form>
+        </div>
+    </nav>
 @endsection

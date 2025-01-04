@@ -6,9 +6,66 @@
     <title>@yield('title', 'BantuIN')</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+                .nav-item {
+            text-align: center;
+        }
+        .nav-link {
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    @if (Auth::user())
+    @elseif (Auth::guard('admins')->user()) 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">BantuIN</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.dashboard')}}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{{route('admin.logout')}}" method="post">
+                                    @csrf
+                                    <button class="nav-link" href="{{ route('admin.logout') }}">Logout</button>
+                                </form>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    @elseif (Auth::guard('helpers')->user())
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">BantuIN</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('helper.dashboard')}}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{{route('helper.logout')}}" method="post">
+                                    @csrf
+                                    <button class="nav-link" href="{{ route('helper.logout') }}">Logout</button>
+                                </form>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    @endif
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">BantuIN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -16,27 +73,11 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ (Auth::user() ? route('user.index') : Auth::guard('admins')->user()) ? route('admin.dashboard') : route('helper.dashboard') }}">Home</a>
-                    </li>
-                    
-                    @if (Auth::user())
+                <ul class="navbar-nav ms-auto">               
+                    @if (Auth::guard('admins')->user())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.create-task') }}">Request Helper</a>
+                            <a class="nav-link" href="{{route('admin.dashboard')}}">Home</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.list-task') }}">List Request</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <form action="{{route('user.logout')}}" method="post">
-                                @csrf
-                                <button class="nav-link" href="{{ route('user.logout') }}">Logout</button>
-                            </form>
-                        </li>
-                    @elseif (Auth::guard('admins')->user())
                         <li class="nav-item">
                             <form action="{{route('admin.logout')}}" method="post">
                                 @csrf
@@ -44,6 +85,9 @@
                             </form>
                         </li>
                     @elseif (Auth::guard('helpers')->user())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ (Auth::user() ? route('user.index') : Auth::guard('admins')->user()) ? route('admin.dashboard') : route('helper.dashboard') }}">Home</a>
+                    </li>
                         <li class="nav-item">
                             <form action="{{route('helper.logout')}}" method="post">
                                 @csrf
@@ -61,7 +105,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
     <div class="container mt-4">
         @if (session('success'))
@@ -80,9 +124,9 @@
         @yield('content')
     </div>
 
-    <footer class="bg-light text-center py-3 mt-5">
+    {{-- <footer class="bg-light text-center py-3 mt-5">
         <p class="mb-0">© 2024 BantuIN. All Rights Reserved.</p>
-    </footer>
+    </footer> --}}
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

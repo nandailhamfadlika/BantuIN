@@ -46,7 +46,7 @@
         </ul>
     @endif
 
-    <!-- Ongoing Tasks Section -->
+    <!-- Completed Tasks Section -->
     <h2>Completed Tasks</h2>
     @if ($completedTasks->isEmpty())
         <p class="text-muted">No completed tasks.</p>

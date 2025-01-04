@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="mb-4">Request Helper</h1>
 
-<form action="{{ route('user.store-task') }}" method="POST">
+<form action="{{ route('user.store-task') }}" method="POST" class="mb-5">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Nama Anda</label>
